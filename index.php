@@ -6,21 +6,20 @@
     <!-- jQuery UI -->
     <link href="css/jquery-ui.css" rel="stylesheet" media="screen">
 
+    <!-- bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
 
-    <!-- Bootstrap -->
-    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- dataTables -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
+
     <!-- styles -->
     <link href="css/styles.css" rel="stylesheet">
-    <link href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
-
-    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
-    <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
     <![endif]-->
 </head>
 <body>
@@ -441,14 +440,15 @@
                         </div>
                     </div>
                 </div>
-            </div
+            </div>
 
 
             <?php
-            include 'lib/dbconfig.php';
-            $sql = "SELECT BatchNumber,invoice_number,po_date,pay_amount,shipping_by,shipping_package,tax_name,items->>'$.*.item_code' itemcode ,items->>'$.*.ProductName' Name  ,
-		                items->>'$.*.PricePerUnit' UnitPrice  , items->>'$.*.QTY' QTY  ,items->>'$.*.ProductGroupID' ProductGroupID FROM TaxInvoice_detail where BatchNumber = '2020-03-04 16:11:02' ";
-            $result = $conn->query($sql); ?>
+//            include 'lib/dbconfig.php';
+//            $sql = "SELECT BatchNumber,invoice_number,po_date,pay_amount,shipping_by,shipping_package,tax_name,items->>'$.*.item_code' itemcode ,items->>'$.*.ProductName' Name  ,
+//		                items->>'$.*.PricePerUnit' UnitPrice  , items->>'$.*.QTY' QTY  ,items->>'$.*.ProductGroupID' ProductGroupID FROM TaxInvoice_detail where BatchNumber = '2020-03-04 16:11:02' ";
+//            $result = $conn->query($sql);
+            ?>
 
             <?php
             // include 'ex_datatables/index.php';
@@ -518,32 +518,28 @@
     </div>
 </footer>
 
-<link href="vendors/datatables/dataTables.bootstrap.css" rel="stylesheet" media="screen">
 
-<script> src = "https://code.jquery.com/jquery-3.3.1.js"</script>
-<script>src = "https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"</script>
+<!-- jquery -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script data-require="jqueryui@*" data-semver="1.10.0" src="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.10.0/jquery-ui.js"></script>
 
-<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-<script src="js/jquery.js"></script>
-<!-- jQuery UI -->
-<script src="js/jquery-ui.js"></script>
-<!-- Include all compiled plugins (below), or include individual files as needed -->
-<script src="bootstrap/js/bootstrap.min.js"></script>
+<!-- bootstrap -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 
-<script src="vendors/datatables/js/jquery.dataTables.min.js"></script>
+<!-- dataTables -->
+<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
 
-<script src="vendors/datatables/dataTables.bootstrap.js"></script>
-
+<!-- custom js -->
 <script src="js/custom.js"></script>
 <script src="js/tables.js"></script>
-<script>$(document).ready(function () {
-        console.log("test");
-        $('#tbBat').DataTable({
-            "ajax": "/data/batch_inv_rec.php"
-        });
-    });
-</script>
 
+<script>
+    $(document).ready(function() {
+        $('#tbBat').DataTable({
+            "ajax": "https://ws01.nationgroup.com/happy2jde/data/batch_inv_rec.php"
+        });
+    } );
+</script>
 
 </body>
 </html>
