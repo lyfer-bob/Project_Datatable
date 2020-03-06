@@ -11,8 +11,8 @@ if ($conn->connect_error) {
 }
 
 
-$orauser = "PRODDTA";
-$orapass = "PRODDTA";
+$orauser = "happy";
+$orapass = "Happy#2020";
 
 
 /* Database config */
