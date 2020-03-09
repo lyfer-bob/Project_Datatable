@@ -15,6 +15,9 @@
     <!-- styles -->
     <link href="css/styles.css" rel="stylesheet">
 
+    <!--timepicker-->
+    <link href="build/jquery.datetimepicker.min.css" rel="stylesheet">
+
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -415,7 +418,37 @@
                 <div class="col-md-12">
                     <div class="content-box-large">
                         <div class="panel-title">Batch Detail</div>
-                        <div class="table-responsive">
+                        <div class=" form-inline">
+                            <div class="form-group pr-2 pb-1">
+                                <label class="label-search">วันที่ &nbsp;:&nbsp;</label>
+                                <input type="text" class="form-control custom-date"  id="picker" max/>
+                            </div>
+                            <div class="form-group pr-2 pb-1">
+                                <label class="label-search">Batch &nbsp;:&nbsp;</label>
+                                <select class="form-control custom-select" id="batch_serch" >
+                                    <option value="">--bacth detail--</option>
+                                </select>
+                            </div>
+                            <div class="form-group pr-2 pb-1">
+                                <label class="label-search">Type &nbsp;:&nbsp;</label>
+                                <select class="form-control custom-select" id="type_serch">
+                                    <option value="">--bacth detail--</option>
+                                </select>
+                            </div>
+                            <div class="form-group pr-2 pb-1">
+                                <label class="label-search">Type &nbsp;:&nbsp;</label>
+                                <select class="form-control custom-select" id="type_serch" onchange="getval(this);">
+                                    <option value="">--bacth detail--</option>
+                                    <option value="1">One</option>
+                                    <option value="2">Two</option>
+                                </select>
+                            </div>
+
+
+                        </div>
+
+
+                            <div class="table-responsive">
                             <table id="tbBat" class="display" style="width:100%">
                                 <thead>
                                 <tr>
@@ -427,11 +460,7 @@
                                     <th>Shipping Package</th>
                                     <th>Customer Name</th>
                                     <th>items</th>
-                                    <th>items</th>
-                                    <th>items</th>
-                                    <th>items</th>
-                                    <th>items</th>
-                                    <th>items</th>
+
 
                                 </tr>
                                 </thead>
@@ -529,17 +558,70 @@
 <!-- dataTables -->
 <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
 
-<!-- custom js -->
-<script src="js/custom.js"></script>
-<script src="js/tables.js"></script>
-
+<!--    date-->
+<!--<script src = "https://code.jquery.com/jquery-3.3.1.min.js"></script>-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" ></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" ></script>
+<script src= "build/jquery.datetimepicker.full.js"></script>
 <script>
-    $(document).ready(function() {
-        $('#tbBat').DataTable({
-            "ajax": "https://ws01.nationgroup.com/happy2jde/data/batch_inv_rec.php"
-        });
-    } );
+    $('#picker').datetimepicker({ //**-< add datae timpicker by class  $('.picker') if use date by id =  $('#picker')
+        timepicker: false,
+        datepicker: true,
+        format: 'd-m-Y',
+        value: Date.now(),
+        weeks: true
+    })
 </script>
 
+
+<script>
+    $(document).ready(function () {
+        $('#tbBat').DataTable({
+            paging: true,
+            searching: true,
+            // "serverSide": true, **add test slide
+            "processing": true, // add waittime processing datatable
+            "ajax": {
+                "url": "data/batch_inv_rec.php",
+                "dataSrc": ""
+            },
+            //"ajax": "data/batch_inv_rec.php",
+            columns: [
+
+                {"data": "BatchNumber"},
+                {"data": "invoiceNumber"},
+                {"data": "poDate", "className": "col-width-70"},
+                {"data": "payAmount"},
+                {"data": "shippingBy", "className": "dt[-head|-body]-center"},
+                {
+                    "data": null, "className": "dt-body-center",//alingh datatable = "center"
+                    "render": function (data, type, row) { //check data = "" -> data="0"
+                        let result = "";
+                        if (row.shippingPackage === "") {
+                            result = "0";
+                        } else {
+                            result = row.shippingPackage;
+                        }
+                        return result;
+                    },
+
+                },
+                // { "data": "shippingPackage" }, ** data =! 0 when data =""
+                {"data": "taxName", "className": "col-width-100"},
+                {"data": "itemDetail"}
+                /*{ "data": "productName" }, **don't using column
+                { "data": "unitPrice" },
+                { "data": "qty" },
+                { "data": "productGroupID" },
+                { "data": "itemDetail" }*/
+            ]
+        });
+    });
+</script>
+<script>
+    function getval(sel)
+    {
+        alert(sel.value);
+    }</script>
 </body>
 </html>
