@@ -420,35 +420,24 @@
                         <div class="panel-title">Batch Detail</div>
                         <div class=" form-inline">
                             <div class="form-group pr-2 pb-1">
-                                <label class="label-search">วันที่ &nbsp;:&nbsp;</label>
-                                <input type="text" class="form-control custom-date"  id="picker" max/>
-                            </div>
-                            <div class="form-group pr-2 pb-1">
-                                <label class="label-search">Batch &nbsp;:&nbsp;</label>
-                                <select class="form-control custom-select" id="batch_serch" >
-                                    <option value="">--bacth detail--</option>
-                                </select>
-                            </div>
-                            <div class="form-group pr-2 pb-1">
                                 <label class="label-search">Type &nbsp;:&nbsp;</label>
-                                <select class="form-control custom-select" id="type_serch">
-                                    <option value="">--bacth detail--</option>
+                                <select class="form-control custom-select" id="type_serch"  ">
+                                    <option value="">--type detail--</option>
                                 </select>
                             </div>
                             <div class="form-group pr-2 pb-1">
-                                <label class="label-search">Type &nbsp;:&nbsp;</label>
-                                <select class="form-control custom-select" id="type_serch" onchange="getval(this);">
-                                    <option value="">--bacth detail--</option>
-                                    <option value="1">One</option>
-                                    <option value="2">Two</option>
+                                <label class="label-search"> &nbsp; &nbsp; วันที่ &nbsp;:&nbsp;</label>
+                                <input type="text" class="form-control custom-date" id="picker" >
+                            </div>
+                            <div class="form-group pr-2 pb-1">
+                                <label class="label-search"
+                                > &nbsp;  &nbsp;Batch &nbsp;:&nbsp;</label>
+                                <select class="form-control custom-select" id="batch_serch">
+                                    <option value="" id="batch_value"></option>
                                 </select>
                             </div>
-
-
                         </div>
-
-
-                            <div class="table-responsive">
+                        <div class="table-responsive">
                             <table id="tbBat" class="display" style="width:100%">
                                 <thead>
                                 <tr>
@@ -460,8 +449,6 @@
                                     <th>Shipping Package</th>
                                     <th>Customer Name</th>
                                     <th>items</th>
-
-
                                 </tr>
                                 </thead>
 
@@ -473,10 +460,10 @@
 
 
             <?php
-//            include 'lib/dbconfig.php';
-//            $sql = "SELECT BatchNumber,invoice_number,po_date,pay_amount,shipping_by,shipping_package,tax_name,items->>'$.*.item_code' itemcode ,items->>'$.*.ProductName' Name  ,
-//		                items->>'$.*.PricePerUnit' UnitPrice  , items->>'$.*.QTY' QTY  ,items->>'$.*.ProductGroupID' ProductGroupID FROM TaxInvoice_detail where BatchNumber = '2020-03-04 16:11:02' ";
-//            $result = $conn->query($sql);
+            //            include 'lib/dbconfig.php';
+            //            $sql = "SELECT BatchNumber,invoice_number,po_date,pay_amount,shipping_by,shipping_package,tax_name,items->>'$.*.item_code' itemcode ,items->>'$.*.ProductName' Name  ,
+            //		                items->>'$.*.PricePerUnit' UnitPrice  , items->>'$.*.QTY' QTY  ,items->>'$.*.ProductGroupID' ProductGroupID FROM TaxInvoice_detail where BatchNumber = '2020-03-04 16:11:02' ";
+            //            $result = $conn->query($sql);
             ?>
 
             <?php
@@ -549,79 +536,34 @@
 
 
 <!-- jquery -->
+<script src ="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script data-require="jqueryui@*" data-semver="1.10.0" src="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.10.0/jquery-ui.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js" integrity="sha256-T0Vest3yCU7pafRw9r+settMBX6JkKN06dqBnpQ8d30=" crossorigin="anonymous"></script>
 
 <!-- bootstrap -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 
 <!-- dataTables -->
-<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" language="javascript"
+        src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+
+<!--timepicker-->
+<script src="build/jquery.datetimepicker.full.js"></script>
+<script type="text/javascript" src="js/moment/moment.js"></script>
+<script type="text/javascript" src="js/moment/th.js"></script>
 
 <!--    date-->
 <!--<script src = "https://code.jquery.com/jquery-3.3.1.min.js"></script>-->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" ></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" ></script>
-<script src= "build/jquery.datetimepicker.full.js"></script>
-<script>
-    $('#picker').datetimepicker({ //**-< add datae timpicker by class  $('.picker') if use date by id =  $('#picker')
-        timepicker: false,
-        datepicker: true,
-        format: 'd-m-Y',
-        value: Date.now(),
-        weeks: true
-    })
-</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
 
-<script>
-    $(document).ready(function () {
-        $('#tbBat').DataTable({
-            paging: true,
-            searching: true,
-            // "serverSide": true, **add test slide
-            "processing": true, // add waittime processing datatable
-            "ajax": {
-                "url": "data/batch_inv_rec.php",
-                "dataSrc": ""
-            },
-            //"ajax": "data/batch_inv_rec.php",
-            columns: [
+<!--custom-->
 
-                {"data": "BatchNumber"},
-                {"data": "invoiceNumber"},
-                {"data": "poDate", "className": "col-width-70"},
-                {"data": "payAmount"},
-                {"data": "shippingBy", "className": "dt[-head|-body]-center"},
-                {
-                    "data": null, "className": "dt-body-center",//alingh datatable = "center"
-                    "render": function (data, type, row) { //check data = "" -> data="0"
-                        let result = "";
-                        if (row.shippingPackage === "") {
-                            result = "0";
-                        } else {
-                            result = row.shippingPackage;
-                        }
-                        return result;
-                    },
+<script src="js/tables.js"></script>
+<script src="js/timepicker.js"></script>
+<script src="js/batchnumber.js"></script>
 
-                },
-                // { "data": "shippingPackage" }, ** data =! 0 when data =""
-                {"data": "taxName", "className": "col-width-100"},
-                {"data": "itemDetail"}
-                /*{ "data": "productName" }, **don't using column
-                { "data": "unitPrice" },
-                { "data": "qty" },
-                { "data": "productGroupID" },
-                { "data": "itemDetail" }*/
-            ]
-        });
-    });
-</script>
-<script>
-    function getval(sel)
-    {
-        alert(sel.value);
-    }</script>
+
 </body>
 </html>
