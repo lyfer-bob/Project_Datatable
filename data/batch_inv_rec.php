@@ -4,7 +4,7 @@ include '../lib/Common.php';
 
 $Common = new Common();
 
-$sql = "SELECT BatchNumber, 
+$sql = "SELECT  BatchNumber, 
 invoice_number AS invoiceNumber,
 po_date AS poDate,
 pay_amount AS payAmount,
@@ -16,8 +16,9 @@ items->>'$.*.ProductName' AS productName,
 items->>'$.*.PricePerUnit' AS unitPrice,
 items->>'$.*.QTY' AS qty,
 items->>'$.*.ProductGroupID' AS productGroupID 
-FROM TaxInvoice_detail 
-where BatchNumber = '2020-03-04 19:43:43'";
+FROM TaxInvoice_detail
+
+WHERE exec_time = '2020-03-06 20:20:22'"; //add data =  date now to -3(date now) ++
 $result = $conn->query( $sql );
 
 $data = [];
@@ -37,3 +38,4 @@ while( $row = $result->fetch_array(MYSQLI_ASSOC) ){
 //exit;
 
 echo json_encode($data);
+

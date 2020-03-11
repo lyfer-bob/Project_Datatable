@@ -1,6 +1,6 @@
 
 //batch number
-$(document).ready(function () {
+
 
     //Make an Ajax request to a PHP script called car-models.php
     //This will return the data that we can add to our Select element.
@@ -21,7 +21,7 @@ $(document).ready(function () {
                 //Convert the HTMLOptionElement into a JQuery object that can be used with the append method.
                 $(option).html(modelName);
                 //Append the option to our Select element.
-                $("#batch_serch").append(option);
+                $("#batch_search").append(option);
             });
 
             //Change the text of the default "loading" option.
@@ -30,7 +30,7 @@ $(document).ready(function () {
         }
     });
 
-});
+
 
 
 

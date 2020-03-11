@@ -2,6 +2,7 @@
 <html>
 <head>
     <title>Bootstrap Admin Theme v3</title>
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- jQuery UI -->
     <link href="css/jquery-ui.css" rel="stylesheet" media="screen">
@@ -24,6 +25,9 @@
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
     <![endif]-->
+    <style>
+        tr.ex1 {display: none;}
+    </style>
 </head>
 <body>
 <div class="header">
@@ -421,18 +425,21 @@
                         <div class=" form-inline">
                             <div class="form-group pr-2 pb-1">
                                 <label class="label-search">Type &nbsp;:&nbsp;</label>
-                                <select class="form-control custom-select" id="type_serch"  ">
-                                    <option value="">--type detail--</option>
+                                <select class="form-control custom-select" id="type_search"  ">
+                                    <option value="null">--type detail--</option>
+                                    <option value="Invoice">Invoice</option>
+                                    <option value="Receive">Receive</option>
+                                    <option value="Creditnote">Creditnote</option>
                                 </select>
                             </div>
                             <div class="form-group pr-2 pb-1">
                                 <label class="label-search"> &nbsp; &nbsp; วันที่ &nbsp;:&nbsp;</label>
-                                <input type="text" class="form-control custom-date" id="picker" >
+                                <input type="text" class="form-control custom-date" id="datetime" >
                             </div>
                             <div class="form-group pr-2 pb-1">
                                 <label class="label-search"
                                 > &nbsp;  &nbsp;Batch &nbsp;:&nbsp;</label>
-                                <select class="form-control custom-select" id="batch_serch">
+                                <select class="form-control custom-select" id="batch_search">
                                     <option value="" id="batch_value"></option>
                                 </select>
                             </div>
@@ -440,7 +447,7 @@
                         <div class="table-responsive">
                             <table id="tbBat" class="display" style="width:100%">
                                 <thead>
-                                <tr>
+                                <tr id="table_inv-rec">
                                     <th>BatchNumber</th>
                                     <th>Invoice No.</th>
                                     <th>PO Date</th>
@@ -450,6 +457,17 @@
                                     <th>Customer Name</th>
                                     <th>items</th>
                                 </tr>
+
+<!--                                <tr id="table_cn" >-->
+<!--                                    <th>BatchNumber</th>-->
+<!--                                    <th>Creditnote No.</th>-->
+<!--                                    <th>Invoice No.</th>-->
+<!--                                    <th>total</th>-->
+<!--                                    <th>Creditnote Type</th>-->
+<!--                                    <th>remark</th>-->
+<!--                                    <th>Customer Name</th>-->
+<!--                                    <th>items</th>-->
+<!--                                </tr>-->
                                 </thead>
 
                             </table>
@@ -559,10 +577,12 @@
 
 
 <!--custom-->
-
+<script src="js/custom.js"></script>
 <script src="js/tables.js"></script>
 <script src="js/timepicker.js"></script>
 <script src="js/batchnumber.js"></script>
+<script src="js/changetype.js"></script>
+
 
 
 </body>
