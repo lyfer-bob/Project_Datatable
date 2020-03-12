@@ -12,7 +12,7 @@
 
     <!-- dataTables -->
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
-
+    <link rel="stylesheet" href="https://cdn.datatables.net/rowgroup/1.1.1/css/rowGroup.dataTables.min.css">
     <!-- styles -->
     <link href="css/styles.css" rel="stylesheet">
 
@@ -425,7 +425,7 @@
                         <div class=" form-inline">
                             <div class="form-group pr-2 pb-1">
                                 <label class="label-search">Type &nbsp;:&nbsp;</label>
-                                <select class="form-control custom-select" id="type_search"  ">
+                                <select class="form-control custom-select" id="type_search">
                                     <option value="null">--type detail--</option>
                                     <option value="Invoice">Invoice</option>
                                     <option value="Receive">Receive</option>
@@ -445,7 +445,7 @@
                             </div>
                         </div>
                         <div class="table-responsive">
-                            <table id="tbBat" class="display" style="width:100%">
+                            <table id="tbBat" name ="tablebat" class="display" style="width:100%">
                                 <thead>
                                 <tr id="table_inv-rec">
                                     <th>BatchNumber</th>
@@ -554,7 +554,7 @@
 
 
 <!-- jquery -->
-<script src ="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src ="https://code.jquery.com/jquery-3.4.0.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js" integrity="sha256-T0Vest3yCU7pafRw9r+settMBX6JkKN06dqBnpQ8d30=" crossorigin="anonymous"></script>
 
@@ -564,24 +564,25 @@
 <!-- dataTables -->
 <script type="text/javascript" language="javascript"
         src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/rowgroup/1.1.1/js/dataTables.rowGroup.min.js"></script>
 
 <!--timepicker-->
 <script src="build/jquery.datetimepicker.full.js"></script>
-<script type="text/javascript" src="js/moment/moment.js"></script>
-<script type="text/javascript" src="js/moment/th.js"></script>
 
 <!--    date-->
 <!--<script src = "https://code.jquery.com/jquery-3.3.1.min.js"></script>-->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
-
 <!--custom-->
 <script src="js/custom.js"></script>
-<script src="js/tables.js"></script>
+<!--<script src="js/tables.js"></script>-->
 <script src="js/timepicker.js"></script>
 <script src="js/batchnumber.js"></script>
-<script src="js/changetype.js"></script>
+<!--<script src="js/changetype.js"></script>-->
+<script src="js/change.js"></script>
+
+
 
 
 
