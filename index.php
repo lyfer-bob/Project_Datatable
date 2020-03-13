@@ -424,6 +424,10 @@
                         <div class="panel-title">Batch Detail</div>
                         <div class=" form-inline">
                             <div class="form-group pr-2 pb-1">
+                                <label class="label-search"> &nbsp; &nbsp; วันที่ &nbsp;:&nbsp;</label>
+                                <input type="text" class="form-control custom-date" id="datetime" >
+                            </div>
+                            <div class="form-group pr-2 pb-1">
                                 <label class="label-search">Type &nbsp;:&nbsp;</label>
                                 <select class="form-control custom-select" id="type_search">
                                     <option value="null">--type detail--</option>
@@ -431,10 +435,6 @@
                                     <option value="Receive">Receive</option>
                                     <option value="Creditnote">Creditnote</option>
                                 </select>
-                            </div>
-                            <div class="form-group pr-2 pb-1">
-                                <label class="label-search"> &nbsp; &nbsp; วันที่ &nbsp;:&nbsp;</label>
-                                <input type="text" class="form-control custom-date" id="datetime" >
                             </div>
                             <div class="form-group pr-2 pb-1">
                                 <label class="label-search"
@@ -451,11 +451,11 @@
                                     <th>BatchNumber</th>
                                     <th>Invoice No.</th>
                                     <th>PO Date</th>
-                                    <th>Amount.</th>
-                                    <th>Shipping BY</th>
-                                    <th>Shipping Package</th>
-                                    <th>Customer Name</th>
-                                    <th>items</th>
+                                    <th>Amount</th>
+                                    <th>Ship BY</th>
+                                    <th>Ship Pack</th>
+                                    <th>Cus Name</th>
+                                    <th>Items</th>
                                 </tr>
 
 <!--                                <tr id="table_cn" >-->
@@ -581,8 +581,6 @@
 <script src="js/batchnumber.js"></script>
 <!--<script src="js/changetype.js"></script>-->
 <script src="js/change.js"></script>
-
-
 
 
 

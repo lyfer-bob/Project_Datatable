@@ -13,7 +13,7 @@
 
             //Log the data to the console so that
             //you can get a better view of what the script is returning.
-            console.log(data);
+            //console.log(data);
 
             $.each(data, function (key, modelName) {
                 //Use the Option() constructor to create a new HTMLOptionElement.

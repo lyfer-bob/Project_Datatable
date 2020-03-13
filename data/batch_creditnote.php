@@ -17,9 +17,8 @@ CrediteNote_detail.items->>'$.*.PricePerUnit' AS unitPrice,
 CrediteNote_detail.items->>'$.*.QTY' AS qty,
 CrediteNote_detail.items->>'$.*.ProductGroupID' AS productGroupID 
 FROM CrediteNote_detail 
-
-WHERE BatchNumber = '2020-03-06 21:04:59'";
-
+LIMIT 100";
+//--WHERE BatchNumber = '2020-03-06 21:04:59' -- use up from LIMIT
 
 //$sql = "SELECT CrediteNote_detail.BatchNumber,  //if use join table
 // CrediteNote_detail.invoice_number AS invoiceNumber,

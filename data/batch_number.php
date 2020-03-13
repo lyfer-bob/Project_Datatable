@@ -4,10 +4,12 @@ include '../lib/Common.php';
 
 $Common = new Common();
 
+$thisName = $_GET['date'];
+
 $sql = "SELECT DISTINCT BatchNumber
 FROM TaxInvoice_detail
-
-WHERE pay_by = 'บัตรเครดิต'";
+LIMIT 40";
+//WHERE pay_by = 'บัตรเครดิต'";
 $result = $conn->query( $sql );
 
 $data = [];

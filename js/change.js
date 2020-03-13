@@ -1,49 +1,13 @@
+tableInit();
 $(document).ready(function () {
     //init
-    tableInvoiceDraw();
-    //     tableCreditNoteDraw();
-     // tableDraw();
+
     $('#type_search,#datetime,#tbBat').change(function () {
-        tableDraw();
+        tableEdit();
     });
 });
 
-
-function tableDraw() {
-    let table = $('#tbBat').DataTable();
-    let typeSearch = $('#type_search').val();
-    let dateSearch = $('#datetime').val();
-    let batchSearch = $('#batch_search').val();
-    if (typeSearch === "Creditnote") {
-        $(table.column(2).header()).text('Credit No.'); //change  header columns
-        $(table.column(3).header()).text('Total');
-        $(table.column(4).header()).text('CN_Type');
-        $(table.column(5).header()).text('remark');
-        $(table.column(6).header()).text('Customer ID');
-        tableCreditNoteDraw();
-
-    } else {
-        $(table.column(2).header()).text('PO Date'); //change  header columns
-        $(table.column(3).header()).text('Amount');
-        $(table.column(4).header()).text('Shipping BY');
-        $(table.column(5).header()).text('Shipping Package');
-        $(table.column(6).header()).text('Customer Name');
-    }
-    if (typeSearch == "Receive" || typeSearch == "Invoice" ) {
-        if (typeSearch === "Receive") {
-            tableReciveDraw();
-            // tableReciveDraw(typeSearch, dateSearch, batchSearch);
-        } else {
-            tableInvoiceDraw();
-            // tableInvoiceDraw(typeSearch, dateSearch, batchSearch);
-        }
-    }
-
-}
-
-function tableInvoiceDraw(typeSearch, dateSearch, batchSearch) {
-    // Datatable
-
+function tableInit(typeSearch, dateSearch, batchSearch) {
     $('#tbBat').DataTable({
         "destroy": true,
         "retrieve": true,
@@ -77,8 +41,30 @@ function tableInvoiceDraw(typeSearch, dateSearch, batchSearch) {
             // { "data": "shippingPackage" }, ** data =! 0 when data =""
             {"data": "taxName", "className": "col-width-100"},
             {"data": "itemDetail"}
-
         ],
+        "language": {
+            "sEmptyTable": "ไม่มีข้อมูลในตาราง",
+            "sInfo": "แสดง _START_ ถึง _END_ จาก _TOTAL_ แถว",
+            "sInfoEmpty": "แสดง 0 ถึง 0 จาก 0 แถว",
+            "sInfoFiltered": "(กรองข้อมูล _MAX_ ทุกแถว)",
+            "sInfoPostFix": "",
+            "sInfoThousands": ",",
+            "sLengthMenu": "แสดง _MENU_ แถว",
+            "sLoadingRecords": "กำลังโหลดข้อมูล...",
+            "sProcessing": "กำลังดำเนินการ...",
+            "sSearch": "ค้นหา",
+            "sZeroRecords": "ไม่พบข้อมูล",
+            "oPaginate": {
+                "sFirst": "หน้าแรก",
+                "sPrevious": "ก่อนหน้า",
+                "sNext": "ถัดไป",
+                "sLast": "หน้าสุดท้าย"
+            },
+            "oAria": {
+                "sSortAscending": ": เปิดใช้งานการเรียงข้อมูลจากน้อยไปมาก",
+                "sSortDescending": ": เปิดใช้งานการเรียงข้อมูลจากมากไปน้อย"
+            }
+        },
         "paging": true,
         "searching": true,
         "processing": true,
@@ -86,188 +72,118 @@ function tableInvoiceDraw(typeSearch, dateSearch, batchSearch) {
     });
 }
 
-function tableReciveDraw(typeSearch, dateSearch, batchSearch) {
-    console.log('recive');
-}
 
-function tableCreditNoteDraw() {
-    GetData();
-    function GetData() {
-        console.log("maggg");
-        $.ajax({
-            type: 'GET',
-            contentType: "application/json; charset=utf-8",
-            dataType: 'json',
-            url: "data/batch_creditnote.php",
-            success: function (response) {
-                console.log("SetDataTable");
-                SetDataTable("tbBat", response)
-            },
-        })
-    }
-
-    function SetDataTable(tableName, data) {
-        if ($.fn.DataTable.isDataTable('#tbBat')) {
-            $('#tbBat').DataTable().clear().destroy();
-            $('#tbBat').empty();
-        }
-
-        $('#tbBat').DataTable({
-            order: [],
-            "language": {
-                "lengthMenu": "แสดง _MENU_ รายการ",
-                "info": "หน้าที่ _PAGE_ จาก _PAGES_ หน้า",
-            },
-            columnDefs: [{
-                "targets": 'no-sort',
-                'orderable': false,
-            }],
-            deferRender: true,
-            data: data,
-            columns: [
-                { title: "BatchNumber", mData: "BatchNumber" },
-                { title: "Invoice No.", mData: "invoiceNumber" },
-                { title: "Credit No", mData: "cnNumber" },
-                { title: "Total", mData: "total" },
-                { title: "CN_Type", mData: "cnType" },
-                { title: "remark", mData: "remark" },
-                { title: "Customer ID", mData: "customer_id" },
-                { title: "Items", mData: "itemDetail" },
-            ]
-        });
+function tableEdit() {
+    let table = $('#tbBat').DataTable();
+    let typeSearch = $('#type_search').val();
+    let dateSearch = $('#datetime').val();
+    let batchSearch = $('#batch_search').val();
+    // sendate(dateSearch);
+    if (typeSearch !== 'null') {
+        GetData(typeSearch);
 
     }
+}
 
+function sendate(dateSearch) {
+    if (typeSearch === 'Creditnote') {
+        window.location.href = "data/batch_creditnote.php?date=" + dateSearch;
+    } else if (typeSearch === 'Receive') {
+        window.location.href = "data/batch_rec.php?date=" + dateSearch;
+    } else if (typeSearch === 'Invoice') {
+        window.location.href = "data/batch_inv_rec.php?date=" + dateSearch;
+    }
+}
+
+function GetData(typeSearch) {
+    let params = {
+        type: 'GET',
+        contentType: "application/json; charset=utf-8",
+        dataType: 'json',
+        //url : 'link',;
+        success: function (response) {
+            SetDataTable("tbBat", response, typeSearch)
+        },
+    }
+    //check url
+    if (typeSearch === 'Creditnote') {
+        params.url = 'data/batch_creditnote.php';
+    } else if (typeSearch === 'Receive') {
+        params.url = 'data/batch_rec.php';
+    } else if (typeSearch === 'Invoice') {
+        params.url = 'data/batch_inv_rec.php';
+    }
+    $.ajax(params);
+}
+
+function SetDataTable(tableName, data, typeSearch) {
+    let columns = [];
+    //check column draw data
+    if (typeSearch === 'Creditnote') {
+        columns = [
+            {title: "BatchNumber", mData: "BatchNumber"}, // title -> ColumnTable1 , mData -> JSONdata1
+            {title: "Invoice No.", mData: "invoiceNumber"},
+            {title: "Credit No", mData: "cnNumber"},
+            {title: "Total", mData: "total"},
+            {title: "CN_Type", mData: "cnType"},
+            {title: "remark", mData: "remark"},
+            {title: "Customer ID", mData: "customer_id"},
+            {title: "Items", mData: "itemDetail"},
+        ]
+    } else {
+        columns = [
+            {title: "BatchNumber", mData: "BatchNumber"},
+            {title: "Invoice No.", mData: "invoiceNumber"},
+            {title: "PO Date", mData: "poDate"},
+            {title: "Amount", mData: "payAmount"},
+            {title: "Ship BY", mData: "shippingBy"},
+            {title: "Ship Pack", mData: "shippingPackage"},
+            {title: "Cus Name", mData: "taxName"},
+            {title: "Items", mData: "itemDetail"},
+        ]
+    }
+    //clear data in
+    if ($.fn.DataTable.isDataTable('#tbBat')) {
+        $('#tbBat').DataTable().clear().destroy();
+        $('#tbBat').empty();
+    }
+    //draw data
+    $('#tbBat').DataTable({
+        order: [],
+        "language": {
+            "sEmptyTable": "ไม่มีข้อมูลในตาราง",
+            "sInfo": "แสดง _START_ ถึง _END_ จาก _TOTAL_ แถว",
+            "sInfoEmpty": "แสดง 0 ถึง 0 จาก 0 แถว",
+            "sInfoFiltered": "(กรองข้อมูล _MAX_ ทุกแถว)",
+            "sInfoPostFix": "",
+            "sInfoThousands": ",",
+            "sLengthMenu": "แสดง _MENU_ แถว",
+            "sLoadingRecords": "กำลังโหลดข้อมูล...",
+            "sProcessing": "กำลังดำเนินการ...",
+            "sSearch": "ค้นหา",
+            "sZeroRecords": "ไม่พบข้อมูล",
+            "oPaginate": {
+                "sFirst": "หน้าแรก",
+                "sPrevious": "ก่อนหน้า",
+                "sNext": "ถัดไป",
+                "sLast": "หน้าสุดท้าย"
+            },
+            "oAria": {
+                "sSortAscending": ": เปิดใช้งานการเรียงข้อมูลจากน้อยไปมาก",
+                "sSortDescending": ": เปิดใช้งานการเรียงข้อมูลจากมากไปน้อย"
+            }
+        },
+        columnDefs: [{
+            "targets": 'no-sort',
+            'orderable': false,
+        }],
+        deferRender: true,
+        data: data,
+        columns: columns
+    });
 
 
 }
-    // console.log('tableCreditNoteDraw');
-    // let table = $('#tbBat').DataTable;
-
-    // $.ajax({
-    //     url : "data/batch_creditnote.php",
-    //     type: 'GET',
-    //     contentType: "application/json",
-    //     success: function(data) {
-    //         // var table = $('#tbBat').DataTable();
-    //         // table.clear();
-    //         // table.rows.add(data.data);
-    //         // table.draw();
-    //
-    //     },
-    //     columns: [
-    //
-    //         {"data": "BatchNumber"}, //add data to column
-    //         {"data": "invoiceNumber"},
-    //         {"data": "cnNumber", "className": "col-width-70"},
-    //         {"data": "total"},
-    //         {"data": "cnType"},
-    //         {"data": "remark", "className": "dt[-head|-body]-center"},
-    //         {"data": "customer_id", "className": "dt-body-center"},//alingh datatable = "center"
-    //         {"data": "itemDetail"}
-    //     ]
-    //
-    // });
-    // console.log($ajax);
-    // table.clear().draw();
-    // table.rows.add($.ajax).draw();
-
-
-    // table({
-    //     destroy: true,
-    //     retrieve: true,
-    //         "ajax": { "dataSrc": "jsonload",
-    //         },
-    //         //"ajax": "data/batch_inv_rec.php",
-    //         columns: [
-    //
-    //             {"data": "BatchNumber"}, //add data to column
-    //             {"data": "invoiceNumber"},
-    //             {"data": "cnNumber", "className": "col-width-70"},
-    //             {"data": "total"},
-    //             {"data": "cnType"},
-    //             {"data": "remark", "className": "dt[-head|-body]-center"},
-    //             {"data": "customer_id", "className": "dt-body-center"},//alingh datatable = "center"
-    //             {"data": "itemDetail"}
-    //         ],
-    //         "paging": true,
-    //         "searching": true,
-    //         "processing": true,
-    //         "info": true
-    // });
-
-
-    // Datatable
-    // console.log('CreditNote');
-// }
-//     $('#tbBat').DataTable({
-//         "destroy": true,
-//         "retrieve": true,
-//         "ajax": {
-//             "url": "data/batch_creditnote.php",
-//             "dataSrc": "",
-//         },
-//         //"ajax": "data/batch_inv_rec.php",
-//         columns: [
-//
-//             {"data": "BatchNumber"}, //add data to column
-//             {"data": "invoiceNumber"},
-//             {"data": "cnNumber", "className": "col-width-70"},
-//             {"data": "total"},
-//             {"data": "cnType"},
-//             {"data": "remark", "className": "dt[-head|-body]-center"},
-//             {"data": "customer_id", "className": "dt-body-center"},//alingh datatable = "center"
-//             {"data": "itemDetail"}
-//         ],
-//         "paging": true,
-//         "searching": true,
-//
-//         "processing": true,
-//         "info": true
-//
-//     });
-
-
-    // var viewdatatab  =  $('#tbBat').dataTable({
-    //     columns: [
-    //
-    //         {"data": "BatchNumber"}, //add data to column
-    //         {"data": "invoiceNumber"},
-    //         {"data": "cnNumber", "className": "col-width-70"},
-    //         {"data": "total"},
-    //         {"data": "cnType"},
-    //         {"data": "remark", "className": "dt[-head|-body]-center"},
-    //         {"data": "customer_id", "className": "dt-body-center"},//alingh datatable = "center"
-    //         {"data": "itemDetail"}
-    //     ]
-    //
-    // });
-
-    // var table = $('#tbBat').DataTable();
-    // table.clear();
-    // table.rows.add( [ {
-    //     "ajax": {
-    //         "type": 'GET',
-    //         // "url": "data/batch_creditnote.php",
-    //         "url": "data/batch_inv_rec.php",
-    //         "dataSrc": "",
-    //         "contentType": "application/json",
-    //     },
-    //     columns: [
-    //
-    //                 {"data": "BatchNumber"}, //add data to column
-    //                 {"data": "invoiceNumber"},
-    //                 {"data": "cnNumber", "className": "col-width-70"},
-    //                 {"data": "total"},
-    //                 {"data": "cnType"},
-    //                 {"data": "remark", "className": "dt[-head|-body]-center"},
-    //                 {"data": "customer_id", "className": "dt-body-center"},//alingh datatable = "center"
-    //                 {"data": "itemDetail"}
-    //             ]
-    // }]);
-    // table.draw();
-
-
 
 
 
