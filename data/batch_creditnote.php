@@ -17,6 +17,7 @@ CrediteNote_detail.items->>'$.*.PricePerUnit' AS unitPrice,
 CrediteNote_detail.items->>'$.*.QTY' AS qty,
 CrediteNote_detail.items->>'$.*.ProductGroupID' AS productGroupID 
 FROM CrediteNote_detail 
+WHERE DataOf = "."'".$_GET['date']."'"."
 LIMIT 100";
 //--WHERE BatchNumber = '2020-03-06 21:04:59' -- use up from LIMIT
 
@@ -39,7 +40,9 @@ LIMIT 100";
 //WHERE cn_number = 'CNHP630100380'";
 
 $result = $conn->query( $sql );
-
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
 $data = [];
 
 while( $row = $result->fetch_array(MYSQLI_ASSOC) ){

@@ -4,8 +4,7 @@ include '../lib/Common.php';
 
 $Common = new Common();
 
-$thisDate = $_GET['date'];
-echo $thisDate;
+
 
 $sql = "SELECT BatchNumber, 
 invoice_number AS invoiceNumber,
@@ -19,9 +18,11 @@ items->>'$.*.ProductName' AS productName,
 items->>'$.*.PricePerUnit' AS unitPrice,
 items->>'$.*.QTY' AS qty,
 items->>'$.*.ProductGroupID' AS productGroupID 
-FROM TaxInvoice_detail
+FROM TaxInvoice_detail 
+WHERE DataOf = "."'".$_GET['date']."'"."
 LIMIT 100 ";
-//--WHERE exec_time = '2020-03-06 20:20:22' -- use up from LIMIT
+//--WHERE po_date = '.$thisDate.' -- use up from LIMIT
+//WHERE po_date = "."'".$_GET['value']."'"."
 
 $result = $conn->query( $sql );
 

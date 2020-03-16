@@ -425,7 +425,7 @@
                         <div class=" form-inline">
                             <div class="form-group pr-2 pb-1">
                                 <label class="label-search"> &nbsp; &nbsp; วันที่ &nbsp;:&nbsp;</label>
-                                <input type="text" class="form-control custom-date" id="datetime" >
+                                <input type="text" class="form-control custom-date" id="date_search" >
                             </div>
                             <div class="form-group pr-2 pb-1">
                                 <label class="label-search">Type &nbsp;:&nbsp;</label>
@@ -445,7 +445,7 @@
                             </div>
                         </div>
                         <div class="table-responsive">
-                            <table id="tbBat" name ="tablebat" class="display" style="width:100%">
+                            <table id="tbBat"  class="display" style="width:100%">
                                 <thead>
                                 <tr id="table_inv-rec">
                                     <th>BatchNumber</th>
@@ -578,7 +578,7 @@
 <script src="js/custom.js"></script>
 <!--<script src="js/tables.js"></script>-->
 <script src="js/timepicker.js"></script>
-<script src="js/batchnumber.js"></script>
+<!--<script src="js/batchnumber.js"></script>-->
 <!--<script src="js/changetype.js"></script>-->
 <script src="js/change.js"></script>
 

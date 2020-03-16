@@ -17,6 +17,7 @@ items->>'$.*.PricePerUnit' AS unitPrice,
 items->>'$.*.QTY' AS qty,
 items->>'$.*.ProductGroupID' AS productGroupID 
 FROM Receive_detail
+WHERE DataOf = "."'".$_GET['date']."'"."
 LIMIT 100 ";
 //--WHERE exec_time = '2020-03-06 20:20:22' -- use up from LIMIT
 

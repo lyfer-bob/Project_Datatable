@@ -2,7 +2,7 @@ tableInit();
 $(document).ready(function () {
     //init
 
-    $('#type_search,#datetime,#tbBat').change(function () {
+    $('#type_search,#date_search,#batch_search').change(function () {
         tableEdit();
     });
 });
@@ -74,52 +74,82 @@ function tableInit(typeSearch, dateSearch, batchSearch) {
 
 
 function tableEdit() {
-    let table = $('#tbBat').DataTable();
     let typeSearch = $('#type_search').val();
-    let dateSearch = $('#datetime').val();
+    let dateSearch = $('#date_search').val();
     let batchSearch = $('#batch_search').val();
-    // sendate(dateSearch);
     if (typeSearch !== 'null') {
-        GetData(typeSearch);
-
+        GetData(typeSearch, dateSearch);
+        GetBatch(typeSearch, dateSearch);
     }
+    // SendDatetime(dateSearch,typeSearch);
 }
 
-function sendate(dateSearch) {
-    if (typeSearch === 'Creditnote') {
-        window.location.href = "data/batch_creditnote.php?date=" + dateSearch;
-    } else if (typeSearch === 'Receive') {
-        window.location.href = "data/batch_rec.php?date=" + dateSearch;
-    } else if (typeSearch === 'Invoice') {
-        window.location.href = "data/batch_inv_rec.php?date=" + dateSearch;
-    }
-}
+// function SendDatetime(date,type) {
+//
+//     if (type === 'Creditnote') {
+//         console.log(date);
+//         $.ajax({
+//             url: "data/batch_creditnote.php?value="+date,
+//             type: 'get',
+//             success: function (data) {
+//                 // success
+//             }
+//
+//         });
+//     } else if (type === 'Receive') {
+//         console.log(date);
+//         $.ajax({
+//             url: "data/batch_rec.php?value="+date,
+//             type: 'get',
+//             success: function (data) {
+//                 // success
+//             }
+//
+//         });
+//     } else if (type === 'Invoice') {
+//         console.log(date );
+//         $.ajax({
+//             url: "data/batch_inv_rec.php?value="+date,
+//             type: 'get',
+//             success: function (data) {
+//                 // success
+//             }
+//
+//         });
+//     }
+// }
 
-function GetData(typeSearch) {
+
+function GetData(type, date) {
     let params = {
         type: 'GET',
         contentType: "application/json; charset=utf-8",
         dataType: 'json',
         //url : 'link',;
         success: function (response) {
-            SetDataTable("tbBat", response, typeSearch)
+            SetDataTable(response, type)
         },
     }
     //check url
-    if (typeSearch === 'Creditnote') {
-        params.url = 'data/batch_creditnote.php';
-    } else if (typeSearch === 'Receive') {
-        params.url = 'data/batch_rec.php';
-    } else if (typeSearch === 'Invoice') {
-        params.url = 'data/batch_inv_rec.php';
+    if (type === 'Creditnote') {
+        params.url = 'data/batch_creditnote.php?date=' + date;
+    } else if (type === 'Receive') {
+        params.url = 'data/batch_rec.php?date=' + date;
+    } else if (type === 'Invoice') {
+        params.url = 'data/batch_inv_rec.php?date=' + date;
     }
     $.ajax(params);
+
+    //check batch number from
+
+
 }
 
-function SetDataTable(tableName, data, typeSearch) {
+
+function SetDataTable(data, type) {
     let columns = [];
     //check column draw data
-    if (typeSearch === 'Creditnote') {
+    if (type === 'Creditnote') {
         columns = [
             {title: "BatchNumber", mData: "BatchNumber"}, // title -> ColumnTable1 , mData -> JSONdata1
             {title: "Invoice No.", mData: "invoiceNumber"},
@@ -185,5 +215,49 @@ function SetDataTable(tableName, data, typeSearch) {
 
 }
 
+function GetBatch(type,date) {
+    let table = '';
+    let params = {
+        type: 'GET',
+        contentType: "application/json; charset=utf-8",
+        dataType: 'json',
+        //url : 'link',;
+        success: function (r) {
+            let data = r;
+            $("#batch_search").html('');
+            for(var i=0; i<data.length; i++) { // Loop through the data & construct the options
+                $.each(data, function(){
+                    $("#batch_search").append('<option value="'+ data[i] +'">'+ data[i] +'</option>')
+                })
 
+            }
+
+        },
+    }
+    //send get bat to batch_number
+    if (type === 'Creditnote') {
+        params.url = 'data/batch_number.php?type=CrediteNote_detail&date=' + date;
+        table = 'CrediteNote_detail';
+    } else if (type === 'Receive') {
+        params.url = 'data/batch_number.php?type=Receive_detail&date=' + date;
+        table = 'Receive_detail';
+    } else if (type === 'Invoice') {
+        params.url = 'data/batch_number.php?type=TaxInvoice_detail&date=' + date;
+        table = 'TaxInvoice_detail';
+    }
+    $.ajax(params);
+}
+
+
+// function SetBatchNumber(data,table) {
+//
+//         $.getJSON("data/batch_number.php?type="+table, function(data){
+//             $("#batch_search").html('');
+//             $.each(data, function(){
+//                 $("#batch_search").append('<option value="'+ this.value +'">'+ this.name +'</option>')
+//
+//             })
+//
+//         })
+// }
 
