@@ -2,28 +2,32 @@ tableInit();
 $(document).ready(function () {
     //init
 
-    $('#type_search,#date_search,#batch_search').change(function () {
+    $('#type_search,#date_search').change(function () {
         tableEdit();
     });
 });
 
-function tableInit(typeSearch, dateSearch, batchSearch) {
+function tableInit() {
+    let date = $('#date_search').val();
     $('#tbBat').DataTable({
+
         "destroy": true,
         "retrieve": true,
+        "ordering": false,
         "ajax": {
-            // "url": "data/batch_creditnote.php",
-            "url": "data/batch_inv_rec.php",
+            // "url": "data/batch_cre.php",
+
+            "url": "data/batch_inv.php?&date=" + date,
             "dataSrc": ""
 
         },
-        //"ajax": "data/batch_inv_rec.php",
+        //"ajax": "data/batch_inv.php",
         columns: [
 
             {"data": "BatchNumber"}, //add data to column
             {"data": "invoiceNumber"},
             {"data": "poDate", "className": "col-width-70"},
-            {"data": "payAmount"},
+            {"data": "payAmount", "className": "col-width-50"},
             {"data": "shippingBy", "className": "dt[-head|-body]-center"},
             {
                 "data": null, "className": "dt-body-center",//alingh datatable = "center"
@@ -39,7 +43,7 @@ function tableInit(typeSearch, dateSearch, batchSearch) {
 
             },
             // { "data": "shippingPackage" }, ** data =! 0 when data =""
-            {"data": "taxName", "className": "col-width-100"},
+            {"data": "taxName", "className": "col-width-70"},
             {"data": "itemDetail"}
         ],
         "language": {
@@ -74,11 +78,11 @@ function tableInit(typeSearch, dateSearch, batchSearch) {
 
 
 function tableEdit() {
+
     let typeSearch = $('#type_search').val();
     let dateSearch = $('#date_search').val();
-    let batchSearch = $('#batch_search').val();
     if (typeSearch !== 'null') {
-        GetData(typeSearch, dateSearch);
+        GetDatatable(typeSearch, dateSearch);
         GetBatch(typeSearch, dateSearch);
     }
     // SendDatetime(dateSearch,typeSearch);
@@ -89,7 +93,7 @@ function tableEdit() {
 //     if (type === 'Creditnote') {
 //         console.log(date);
 //         $.ajax({
-//             url: "data/batch_creditnote.php?value="+date,
+//             url: "data/batch_cre.php?value="+date,
 //             type: 'get',
 //             success: function (data) {
 //                 // success
@@ -109,7 +113,7 @@ function tableEdit() {
 //     } else if (type === 'Invoice') {
 //         console.log(date );
 //         $.ajax({
-//             url: "data/batch_inv_rec.php?value="+date,
+//             url: "data/batch_inv.php?value="+date,
 //             type: 'get',
 //             success: function (data) {
 //                 // success
@@ -119,8 +123,39 @@ function tableEdit() {
 //     }
 // }
 
+$('#batch_search').change(function () {
+    let typeSearch = $('#type_search').val();
+    let dateSearch = $('#date_search').val();
+    let batchSearch = $('#batch_search').val();
+    BatchChange(typeSearch, dateSearch, batchSearch);
+    function BatchChange(type, date, batch) {
+        let types = '';
+        if(type == 'Invoice') {
+             types = 'inv';
+        } else  if (type == 'Receive') {
+             types = 'rec';
+        } else {
+             types = 'cre';
+        }
 
-function GetData(type, date) {
+        $.ajax({
+            type: 'GET',
+            contentType: "application/json; charset=utf-8",
+            dataType: 'json',
+            url: 'data/testget.php?date=' + date + '&batch=' +  batch + '&type=' +  types,
+            success: function (response) {
+                console.log(response);
+                SetDataTable(response, type)
+            },
+        });
+
+
+    }
+
+
+});
+
+function GetDatatable(type, date, batch ) {
     let params = {
         type: 'GET',
         contentType: "application/json; charset=utf-8",
@@ -132,17 +167,15 @@ function GetData(type, date) {
     }
     //check url
     if (type === 'Creditnote') {
-        params.url = 'data/batch_creditnote.php?date=' + date;
+        params.url = 'data/batch_cre.php?date=' + date;
     } else if (type === 'Receive') {
-        params.url = 'data/batch_rec.php?date=' + date;
+        params.url = 'data/batch_rec.php?date=' + date
     } else if (type === 'Invoice') {
-        params.url = 'data/batch_inv_rec.php?date=' + date;
+        params.url = 'data/batch_inv.php?date=' + date;
     }
     $.ajax(params);
 
     //check batch number from
-
-
 }
 
 
@@ -164,11 +197,23 @@ function SetDataTable(data, type) {
         columns = [
             {title: "BatchNumber", mData: "BatchNumber"},
             {title: "Invoice No.", mData: "invoiceNumber"},
-            {title: "PO Date", mData: "poDate"},
-            {title: "Amount", mData: "payAmount"},
+            {title: "PO Date", mData: "poDate", "className": "col-width-70"},
+            {title: "Amount", mData: "payAmount", "className": "col-width-50"},
             {title: "Ship BY", mData: "shippingBy"},
-            {title: "Ship Pack", mData: "shippingPackage"},
-            {title: "Cus Name", mData: "taxName"},
+            {title: "Ship Pack", mData:null,
+                "className": "dt-body-center",//alingh datatable = "center"
+                "render": function (data, type, row) { //check data = "" -> data="0"
+                    let result = "";
+                    if (row.shippingPackage === "") {
+                        result = "0";
+                    } else {
+                        result = row.shippingPackage;
+                    }
+                    return result;
+                },
+
+            },
+            {title: "Cus Name", mData: "taxName", "className": "col-width-70"},
             {title: "Items", mData: "itemDetail"},
         ]
     }
@@ -179,7 +224,7 @@ function SetDataTable(data, type) {
     }
     //draw data
     $('#tbBat').DataTable({
-        order: [],
+        "ordering": false,
         "language": {
             "sEmptyTable": "ไม่มีข้อมูลในตาราง",
             "sInfo": "แสดง _START_ ถึง _END_ จาก _TOTAL_ แถว",
@@ -216,7 +261,6 @@ function SetDataTable(data, type) {
 }
 
 function GetBatch(type,date) {
-    let table = '';
     let params = {
         type: 'GET',
         contentType: "application/json; charset=utf-8",
@@ -225,9 +269,10 @@ function GetBatch(type,date) {
         success: function (r) {
             let data = r;
             $("#batch_search").html('');
-            for(var i=0; i<data.length; i++) { // Loop through the data & construct the options
+            for(var i=0; i<data.length;) { // Loop through the data & construct the options
                 $.each(data, function(){
                     $("#batch_search").append('<option value="'+ data[i] +'">'+ data[i] +'</option>')
+                    i++;
                 })
 
             }
@@ -236,14 +281,11 @@ function GetBatch(type,date) {
     }
     //send get bat to batch_number
     if (type === 'Creditnote') {
-        params.url = 'data/batch_number.php?type=CrediteNote_detail&date=' + date;
-        table = 'CrediteNote_detail';
+        params.url = 'data/batch_number.php?type=cre&date=' + date;
     } else if (type === 'Receive') {
-        params.url = 'data/batch_number.php?type=Receive_detail&date=' + date;
-        table = 'Receive_detail';
+        params.url = 'data/batch_number.php?type=rec&date=' + date;
     } else if (type === 'Invoice') {
-        params.url = 'data/batch_number.php?type=TaxInvoice_detail&date=' + date;
-        table = 'TaxInvoice_detail';
+        params.url = 'data/batch_number.php?type=inv&date=' + date;
     }
     $.ajax(params);
 }

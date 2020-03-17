@@ -424,25 +424,28 @@
                         <div class="panel-title">Batch Detail</div>
                         <div class=" form-inline">
                             <div class="form-group pr-2 pb-1">
-                                <label class="label-search"> &nbsp; &nbsp; วันที่ &nbsp;:&nbsp;</label>
+                                <br>
+                                <label class="label-search">Date &nbsp;:&nbsp;</label>
                                 <input type="text" class="form-control custom-date" id="date_search" >
                             </div>
                             <div class="form-group pr-2 pb-1">
+                                <br>
                                 <label class="label-search">Type &nbsp;:&nbsp;</label>
                                 <select class="form-control custom-select" id="type_search">
-                                    <option value="null">--type detail--</option>
                                     <option value="Invoice">Invoice</option>
                                     <option value="Receive">Receive</option>
                                     <option value="Creditnote">Creditnote</option>
                                 </select>
                             </div>
                             <div class="form-group pr-2 pb-1">
-                                <label class="label-search"
-                                > &nbsp;  &nbsp;Batch &nbsp;:&nbsp;</label>
+                                <br>
+                                <label class="label-search"> &nbsp;  &nbsp;Batch &nbsp;:&nbsp;</label>
                                 <select class="form-control custom-select" id="batch_search">
-                                    <option value="" id="batch_value"></option>
+                                    <option value="null">--batch detail--</option>
                                 </select>
                             </div>
+                            <br>
+                            <br>
                         </div>
                         <div class="table-responsive">
                             <table id="tbBat"  class="display" style="width:100%">
