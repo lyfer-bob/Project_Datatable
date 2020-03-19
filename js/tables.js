@@ -1,18 +1,18 @@
 // Datatable
 
     $('#tbBat').DataTable({
-        paging: true,
-        searching: true,
-        // "serverSide": true, **add test slide
-        "processing": true, // add waittime processing datatable
         "destroy": true,
         "retrieve": true,
+        "paging": true,
+        "searching": true,
+        "serverSide": true,
+        "processing": true, // add waittime processing datatable
         "ajax": {
             // "url": "data/batch_creditnote.php",
             "url": "data/batch_inv_rec.php",
             "dataSrc": ""
         },
-        
+
         //"ajax": "data/batch_inv_rec.php",
         columns: [
 
