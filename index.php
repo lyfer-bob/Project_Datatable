@@ -18,6 +18,8 @@
 
     <!--timepicker-->
     <link href="build/jquery.datetimepicker.min.css" rel="stylesheet">
+    <!-- custom css -->
+    <link href="css/custom.css"  rel="stylesheet">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -450,7 +452,7 @@
                         <div class="table-responsive">
                             <table id="tbBat"  class="display" style="width:100%">
                                 <thead>
-                                <tr id="table_inv-rec">
+                                <tr>
                                     <th>BatchNumber</th>
                                     <th>Invoice No.</th>
                                     <th>PO Date</th>
@@ -460,87 +462,12 @@
                                     <th>Cus Name</th>
                                     <th>Items</th>
                                 </tr>
-
-<!--                                <tr id="table_cn" >-->
-<!--                                    <th>BatchNumber</th>-->
-<!--                                    <th>Creditnote No.</th>-->
-<!--                                    <th>Invoice No.</th>-->
-<!--                                    <th>total</th>-->
-<!--                                    <th>Creditnote Type</th>-->
-<!--                                    <th>remark</th>-->
-<!--                                    <th>Customer Name</th>-->
-<!--                                    <th>items</th>-->
-<!--                                </tr>-->
                                 </thead>
-
                             </table>
                         </div>
                     </div>
                 </div>
             </div>
-
-
-            <?php
-            //            include 'lib/dbconfig.php';
-            //            $sql = "SELECT BatchNumber,invoice_number,po_date,pay_amount,shipping_by,shipping_package,tax_name,items->>'$.*.item_code' itemcode ,items->>'$.*.ProductName' Name  ,
-            //		                items->>'$.*.PricePerUnit' UnitPrice  , items->>'$.*.QTY' QTY  ,items->>'$.*.ProductGroupID' ProductGroupID FROM TaxInvoice_detail where BatchNumber = '2020-03-04 16:11:02' ";
-            //            $result = $conn->query($sql);
-            ?>
-
-            <?php
-            // include 'ex_datatables/index.php';
-            /* echo  "<div class=\"panel-heading\">";
-             echo  "<div class=\"panel-title\">Batch Detail</div>";
-             echo  "</div>";
-             echo  "<div class=\"panel-body\">";
-             echo  "<table cellpadding=\"0\" cellspacing=\"0\" border=\"0\" class=\"table table-striped table-bordered\" id=\"example\">";
-             echo  "<thead>";
-             echo  "<tr>";
-             echo  "<th>BatchNumber</th>";
-             echo  "<th>Invoice No.</th>";
-             echo  "<th>PO Date</th>";
-             echo  "<th>Amount</th>";
-             echo  "<th>Shipping BY</th>";
-             echo  "<th>Shipping Package</th>";
-             echo  "<th>Customer Name</th>";
-             echo  "<th>items</th>";
-             echo  "</tr>";
-             echo  "</thead>";
-             echo  "<tbody>";
-             while( $row = $result->fetch_array(MYSQLI_BOTH) ){
-                 echo "<tr>";
-                 echo "<td>".$row['BatchNumber']."</td>";
-                 echo "<td>".$row['invoice_number']."</td>";
-                 echo "<td style=\"width: 80px;\">".$row['po_date']."</td>";
-                 echo "<td>".$row['pay_amount']."</td>";
-                 echo "<td>".$row['shipping_by']."</td>";
-                 echo "<td>".$row['shipping_package']."</td>";
-                 echo "<td>".$row['tax_name']."</td>";
-                 echo "<td>".expand_items($row['Name'],$row['QTY'],$row['UnitPrice'])."</td>";
-                 echo "</tr>";
-              }
-
-
-         echo "</tbody></table></div></div>";
-         $conn->close();
-         function expand_items($item_l,$qty_l,$up_l){
-             $tmp1 = preg_replace('/\"|\[|\]/', '', $item_l);
-             $tmp2 = explode(",",$tmp1);
-             $tmp3 = preg_replace('/\"|\[|\]/', '', $qty_l);
-             $tmp4 = explode(",",$tmp3);
-             $tmp5 = preg_replace('/\"|\[|\]/', '', $up_l);
-             $tmp6 = explode(",",$tmp5);
-             $jj=0;
-             foreach ($tmp2 as $values){
-                 @$item.="<p>".$values."จำนวน ".$tmp4[$jj]." ราคา ".$tmp6[$jj];
-                 @$item.="</p>";
-                 $jj++;
-             }
-             return $item;
-             }*/
-            ?>
-
-
         </div>
     </div>
 </div>
@@ -578,14 +505,10 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
 <!--custom-->
-<script src="js/custom.js"></script>
-<!--<script src="js/tables.js"></script>-->
+<script src="js/custom.js"></script>>
 <script src="js/timepicker.js"></script>
-<!--<script src="js/batchnumber.js"></script>-->
-<!--<script src="js/changetype.js"></script>-->
+<!--<script src="js/change.js"></script>-->
 <script src="js/change.js"></script>
-
-
 
 </body>
 </html>

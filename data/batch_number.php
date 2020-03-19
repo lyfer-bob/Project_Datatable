@@ -5,22 +5,21 @@ include '../lib/Common.php';
 $Common = new Common();
 
 $table = $_GET['type'];
-
+//check tablename
 if ( isset($table)) {
     if ( $table  == 'inv'){
         $tabledraw = 'TaxInvoice_detail';
     }
-    else if ( $_GET['type'] == 'rec') {
+    else if ( $table == 'rec') {
         $tabledraw = 'Receive_detail';
     }
-    else if( $_GET['type'] == 'cre') {
+    else if(  $table == 'cre') {
         $tabledraw = 'CrediteNote_detail';
     }
 }
 $sql = "SELECT DISTINCT BatchNumber
 FROM $tabledraw
 WHERE DataOf = '" . $_GET['date'] ."'" ;
-//WHERE pay_by = 'บัตรเครดิต'";
 $result = $conn->query($sql);
 
 $data = [];

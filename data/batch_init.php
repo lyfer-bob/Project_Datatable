@@ -17,16 +17,14 @@ items->>'$.*.PricePerUnit' AS unitPrice,
 items->>'$.*.QTY' AS qty,
 items->>'$.*.ProductGroupID' AS productGroupID 
 FROM TaxInvoice_detail 
-WHERE DataOf = "."'".$_GET['date']."'"." 
-LIMIT 100 ";
-//--WHERE po_date = '.$thisDate.' -- use up from LIMIT AND BatchNumber = "."'".$_GET['batch']."'"."
-//WHERE po_date = "."'".$_GET['value']."'"."
+WHERE DataOf = "."'".$_GET['date']."'";
+
 $result = $conn->query( $sql );
 
 $data = [];
 
 while( $row = $result->fetch_array(MYSQLI_ASSOC) ){
-    $row['itemDetail'] = $Common->expand_items($row['productName'], $row['qty'], $row['unitPrice']);
+    $row['itemDetail'] = $Common->expand_items($row['productName'], $row['qty'], $row['unitPrice']);//column items on datatable
 //    echo '<pre>';
 //    print_r($row);
 //    echo '</pre>';

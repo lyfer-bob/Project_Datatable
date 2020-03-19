@@ -18,15 +18,14 @@ items->>'$.*.QTY' AS qty,
 items->>'$.*.ProductGroupID' AS productGroupID 
 FROM TaxInvoice_detail 
 WHERE DataOf = '".$_GET['date']."'";
-//--WHERE po_date = '.$thisDate.' -- use up from LIMIT
-//WHERE po_date = "."'".$_GET['value']."'"."
+
 
 $result = $conn->query( $sql );
 
 $data = [];
 
 while( $row = $result->fetch_array(MYSQLI_ASSOC) ){
-    $row['itemDetail'] = $Common->expand_items($row['productName'], $row['qty'], $row['unitPrice']);
+    $row['itemDetail'] = $Common->expand_items($row['productName'], $row['qty'], $row['unitPrice']);//column items on datatable
 //    echo '<pre>';
 //    print_r($row);
 //    echo '</pre>';

@@ -1,25 +1,23 @@
-tableInit();
+tableInit(); //call table init
 $(document).ready(function () {
-    //init
-
-    $('#type_search,#date_search').change(function () {
-        tableEdit();
+    $('#type_search,#date_search').change(function () {//if date and type  onchange
+        tableEdit(); //call table where type or date onchange
+    });
+    $('#batch_search').change(function () {
+        tableBatchEdit();
     });
 });
 
 function tableInit() {
     let date = $('#date_search').val();
+    //draw table init
     $('#tbBat').DataTable({
-
         "destroy": true,
         "retrieve": true,
         "ordering": false,
         "ajax": {
-            // "url": "data/batch_cre.php",
-
             "url": "data/batch_inv.php?&date=" + date,
             "dataSrc": ""
-
         },
         //"ajax": "data/batch_inv.php",
         columns: [
@@ -40,34 +38,13 @@ function tableInit() {
                     }
                     return result;
                 },
-
             },
             // { "data": "shippingPackage" }, ** data =! 0 when data =""
             {"data": "taxName", "className": "col-width-70"},
             {"data": "itemDetail"}
         ],
         "language": {
-            "sEmptyTable": "ไม่มีข้อมูลในตาราง",
-            "sInfo": "แสดง _START_ ถึง _END_ จาก _TOTAL_ แถว",
-            "sInfoEmpty": "แสดง 0 ถึง 0 จาก 0 แถว",
-            "sInfoFiltered": "(กรองข้อมูล _MAX_ ทุกแถว)",
-            "sInfoPostFix": "",
-            "sInfoThousands": ",",
-            "sLengthMenu": "แสดง _MENU_ แถว",
-            "sLoadingRecords": "กำลังโหลดข้อมูล...",
-            "sProcessing": "กำลังดำเนินการ...",
-            "sSearch": "ค้นหา",
-            "sZeroRecords": "ไม่พบข้อมูล",
-            "oPaginate": {
-                "sFirst": "หน้าแรก",
-                "sPrevious": "ก่อนหน้า",
-                "sNext": "ถัดไป",
-                "sLast": "หน้าสุดท้าย"
-            },
-            "oAria": {
-                "sSortAscending": ": เปิดใช้งานการเรียงข้อมูลจากน้อยไปมาก",
-                "sSortDescending": ": เปิดใช้งานการเรียงข้อมูลจากมากไปน้อย"
-            }
+            "sLengthMenu": "Show :&nbsp;&nbsp;" + "_MENU_ &nbsp;Row",
         },
         "paging": true,
         "searching": true,
@@ -78,94 +55,32 @@ function tableInit() {
 
 
 function tableEdit() {
-
     let typeSearch = $('#type_search').val();
     let dateSearch = $('#date_search').val();
-    if (typeSearch !== 'null') {
-        GetDatatable(typeSearch, dateSearch);
-        GetBatch(typeSearch, dateSearch);
+    if (typeSearch !== 'null') { //check type not null
+        getDatatable(typeSearch, dateSearch); //send para to getDatatable for DrawDatable onChange
+        getBatch(typeSearch, dateSearch);   //send para to getBatch for get batch On SelectOption
     }
-    // SendDatetime(dateSearch,typeSearch);
 }
-
-// function SendDatetime(date,type) {
-//
-//     if (type === 'Creditnote') {
-//         console.log(date);
-//         $.ajax({
-//             url: "data/batch_cre.php?value="+date,
-//             type: 'get',
-//             success: function (data) {
-//                 // success
-//             }
-//
-//         });
-//     } else if (type === 'Receive') {
-//         console.log(date);
-//         $.ajax({
-//             url: "data/batch_rec.php?value="+date,
-//             type: 'get',
-//             success: function (data) {
-//                 // success
-//             }
-//
-//         });
-//     } else if (type === 'Invoice') {
-//         console.log(date );
-//         $.ajax({
-//             url: "data/batch_inv.php?value="+date,
-//             type: 'get',
-//             success: function (data) {
-//                 // success
-//             }
-//
-//         });
-//     }
-// }
-
-$('#batch_search').change(function () {
+function tableBatchEdit() {
     let typeSearch = $('#type_search').val();
     let dateSearch = $('#date_search').val();
     let batchSearch = $('#batch_search').val();
-    BatchChange(typeSearch, dateSearch, batchSearch);
-    function BatchChange(type, date, batch) {
-        let types = '';
-        if(type == 'Invoice') {
-             types = 'inv';
-        } else  if (type == 'Receive') {
-             types = 'rec';
-        } else {
-             types = 'cre';
-        }
+    batchChange(typeSearch, dateSearch, batchSearch); //send all para for get  DrawDatable
+}
 
-        $.ajax({
-            type: 'GET',
-            contentType: "application/json; charset=utf-8",
-            dataType: 'json',
-            url: 'data/testget.php?date=' + date + '&batch=' +  batch + '&type=' +  types,
-            success: function (response) {
-                console.log(response);
-                SetDataTable(response, type)
-            },
-        });
+function getDatatable(type, date ) {
 
-
-    }
-
-
-});
-
-function GetDatatable(type, date, batch ) {
     let params = {
         type: 'GET',
         contentType: "application/json; charset=utf-8",
         dataType: 'json',
-        //url : 'link',;
+        //if don't ise param url : 'link',;
         success: function (response) {
-            SetDataTable(response, type)
+            SetDataTable(response, type) ////send response and type to SetDataTable (DrawTable date +  type )
         },
-    }
-    //check url
+    };
+    //check url and sent Get date to
     if (type === 'Creditnote') {
         params.url = 'data/batch_cre.php?date=' + date;
     } else if (type === 'Receive') {
@@ -174,37 +89,55 @@ function GetDatatable(type, date, batch ) {
         params.url = 'data/batch_inv.php?date=' + date;
     }
     $.ajax(params);
-
-    //check batch number from
 }
 
+function batchChange(type, date, batch) {
+    let types;
+    //check type
+    if(type === 'Invoice') {
+        types = 'inv';
+    } else  if (type === 'Receive') {
+        types = 'rec';
+    } else {
+        types = 'cre';
+    }
+    $.ajax({
+        type: 'GET',
+        contentType: "application/json; charset=utf-8",
+        dataType: 'json',
+        url: 'data/query_all.php?date=' + date + '&batch=' +  batch + '&type=' +  types, //send Get[date,batch,types] to php ,query on MySQL
+        success: function (response) {
+            SetDataTable(response, type) //send response and type to SetDataTable (DrawTable date +  type + batch)
+        },
+    });
+}
 
 function SetDataTable(data, type) {
-    let columns = [];
+    let columns;
     //check column draw data
     if (type === 'Creditnote') {
         columns = [
-            {title: "BatchNumber", mData: "BatchNumber"}, // title -> ColumnTable1 , mData -> JSONdata1
+            {title: "BatchNumber", mData: "BatchNumber", "className": "v-align-top"}, // title -> ColumnTable1 , mData -> JSONdata1
             {title: "Invoice No.", mData: "invoiceNumber"},
             {title: "Credit No", mData: "cnNumber"},
             {title: "Total", mData: "total"},
-            {title: "CN_Type", mData: "cnType"},
+            {title: "CN_Type", mData: "cnType","className": "text-center"},
             {title: "remark", mData: "remark"},
-            {title: "Customer ID", mData: "customer_id"},
+            {title: "Cus ID", mData: "customer_id","className": "text-center"},
             {title: "Items", mData: "itemDetail"},
         ]
     } else {
         columns = [
-            {title: "BatchNumber", mData: "BatchNumber"},
+            {title: "BatchNumber", mData: "BatchNumber", "className": "v-align-top"},
             {title: "Invoice No.", mData: "invoiceNumber"},
-            {title: "PO Date", mData: "poDate", "className": "col-width-70"},
-            {title: "Amount", mData: "payAmount", "className": "col-width-50"},
-            {title: "Ship BY", mData: "shippingBy"},
+            {title: "PO Date", mData: "poDate", "className": "col-width-50"},
+            {title: "Amount", mData: "payAmount", "className": "col-width-30 text-center "},
+            {title: "Ship BY", mData: "shippingBy","className": "col-width-50 text-center" },
             {title: "Ship Pack", mData:null,
-                "className": "dt-body-center",//alingh datatable = "center"
-                "render": function (data, type, row) { //check data = "" -> data="0"
-                    let result = "";
-                    if (row.shippingPackage === "") {
+                "className": "col-width-70  text-center  v-align-top",
+                "render": function (data, type, row) { //can use render where mData:null
+                    let result;
+                    if (row.shippingPackage === "") {//check data = "" -> data="0
                         result = "0";
                     } else {
                         result = row.shippingPackage;
@@ -217,50 +150,30 @@ function SetDataTable(data, type) {
             {title: "Items", mData: "itemDetail"},
         ]
     }
-    //clear data in
-    if ($.fn.DataTable.isDataTable('#tbBat')) {
-        $('#tbBat').DataTable().clear().destroy();
-        $('#tbBat').empty();
+    //clear data in table
+    if ($.fn.DataTable.isDataTable('#tbBat',data)) {
+        var tableDraw = $('#tbBat');
+        tableDraw.DataTable().clear().destroy();
+        tableDraw.empty();
     }
     //draw data
-    $('#tbBat').DataTable({
+    tableDraw.DataTable({
         "ordering": false,
         "language": {
-            "sEmptyTable": "ไม่มีข้อมูลในตาราง",
-            "sInfo": "แสดง _START_ ถึง _END_ จาก _TOTAL_ แถว",
-            "sInfoEmpty": "แสดง 0 ถึง 0 จาก 0 แถว",
-            "sInfoFiltered": "(กรองข้อมูล _MAX_ ทุกแถว)",
-            "sInfoPostFix": "",
-            "sInfoThousands": ",",
-            "sLengthMenu": "แสดง _MENU_ แถว",
-            "sLoadingRecords": "กำลังโหลดข้อมูล...",
-            "sProcessing": "กำลังดำเนินการ...",
-            "sSearch": "ค้นหา",
-            "sZeroRecords": "ไม่พบข้อมูล",
-            "oPaginate": {
-                "sFirst": "หน้าแรก",
-                "sPrevious": "ก่อนหน้า",
-                "sNext": "ถัดไป",
-                "sLast": "หน้าสุดท้าย"
-            },
-            "oAria": {
-                "sSortAscending": ": เปิดใช้งานการเรียงข้อมูลจากน้อยไปมาก",
-                "sSortDescending": ": เปิดใช้งานการเรียงข้อมูลจากมากไปน้อย"
-            }
+            "sLengthMenu": "Show :&nbsp;&nbsp;" + "_MENU_ &nbsp;Row",
         },
         columnDefs: [{
             "targets": 'no-sort',
             'orderable': false,
-        }],
+        },
+          ],
         deferRender: true,
         data: data,
         columns: columns
     });
-
-
 }
 
-function GetBatch(type,date) {
+function getBatch(type,date) {
     let params = {
         type: 'GET',
         contentType: "application/json; charset=utf-8",
@@ -268,17 +181,17 @@ function GetBatch(type,date) {
         //url : 'link',;
         success: function (r) {
             let data = r;
-            $("#batch_search").html('');
-            for(var i=0; i<data.length;) { // Loop through the data & construct the options
+            $("#batch_search").html('');    //clear data on SelectOption
+            for(let i=0; i<data.length;) { // fetch data on SelectOption
                 $.each(data, function(){
-                    $("#batch_search").append('<option value="'+ data[i] +'">'+ data[i] +'</option>')
-                    i++;
+                    $("#batch_search").append('<option value="'+ data[i] +'">'+ data[i] +'</option>');
+                    i++; //use i++ only here!
                 })
 
             }
 
         },
-    }
+    };
     //send get bat to batch_number
     if (type === 'Creditnote') {
         params.url = 'data/batch_number.php?type=cre&date=' + date;
@@ -289,17 +202,4 @@ function GetBatch(type,date) {
     }
     $.ajax(params);
 }
-
-
-// function SetBatchNumber(data,table) {
-//
-//         $.getJSON("data/batch_number.php?type="+table, function(data){
-//             $("#batch_search").html('');
-//             $.each(data, function(){
-//                 $("#batch_search").append('<option value="'+ this.value +'">'+ this.name +'</option>')
-//
-//             })
-//
-//         })
-// }
 
