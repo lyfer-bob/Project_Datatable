@@ -19,16 +19,15 @@ function tableInit() {
             "url": "data/batch_inv.php?&date=" + date,
             "dataSrc": ""
         },
-        //"ajax": "data/batch_inv.php",
         columns: [
 
-            {"data": "BatchNumber"}, //add data to column
+            {"data": "BatchNumber", "className": "v-align-top"}, //add data to column
             {"data": "invoiceNumber"},
-            {"data": "poDate", "className": "col-width-70"},
-            {"data": "payAmount", "className": "col-width-50"},
-            {"data": "shippingBy", "className": "dt[-head|-body]-center"},
+            {"data": "poDate", "className": "col-width-50"},
+            {"data": "payAmount", "className": "col-width-30 text-center "},
+            {"data": "shippingBy","className": "col-width-50 text-center" },
             {
-                "data": null, "className": "dt-body-center",//alingh datatable = "center"
+                "data": null, "className": "col-width-70  text-center  v-align-top",//alingh datatable = "center"
                 "render": function (data, type, row) { //check data = "" -> data="0"
                     let result = "";
                     if (row.shippingPackage === "") {
@@ -120,10 +119,10 @@ function SetDataTable(data, type) {
             {title: "BatchNumber", mData: "BatchNumber", "className": "v-align-top"}, // title -> ColumnTable1 , mData -> JSONdata1
             {title: "Invoice No.", mData: "invoiceNumber"},
             {title: "Credit No", mData: "cnNumber"},
-            {title: "Total", mData: "total"},
+            {title: "Total", mData: "total","className": "text-center"},
             {title: "CN_Type", mData: "cnType","className": "text-center"},
-            {title: "remark", mData: "remark"},
-            {title: "Cus ID", mData: "customer_id","className": "text-center"},
+            {title: "remark", mData: "remark","className": "text-center"},
+            {title: "Cus ID", mData: "customer_id","className": "text-center col-width-50"},
             {title: "Items", mData: "itemDetail"},
         ]
     } else {
