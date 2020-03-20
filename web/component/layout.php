@@ -5,7 +5,7 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- jQuery UI -->
-    <link href="css/jquery-ui.css" rel="stylesheet" media="screen">
+    <link href="../../assets/css/jquery-ui.css" rel="stylesheet" media="screen">
 
     <!-- bootstrap -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
@@ -14,7 +14,7 @@
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/rowgroup/1.1.1/css/rowGroup.dataTables.min.css">
     <!-- styles -->
-    <link href="css/styles.css" rel="stylesheet">
+    <link href="../../assets/css/styles.css" rel="stylesheet">
 
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -34,7 +34,7 @@
             <div class="col-md-5">
                 <!-- Logo -->
                 <div class="logo">
-                    <h1><a href="../index.php">Happy2JDE</a></h1>
+                    <h1><a href="../../index.php">Happy2JDE</a></h1>
                 </div>
             </div>
         </div>
@@ -46,7 +46,7 @@
         <div class="col-md-2">
             <div class="sidebar content-box" style="display: block;">
                 <ul class="nav">
-                    <li><a href="../index.php"><i class="glyphicon glyphicon-home"></i> Dashboard</a></li>
+                    <li><a href="../../index.php"><i class="glyphicon glyphicon-home"></i> Dashboard</a></li>
                     <li><a href="layout.php"><i class="glyphicon glyphicon-list"></i> Testlayou</a></li>
                     <li><a href="batchdetai.php"><i class="glyphicon glyphicon-list"></i> Statistics (Charts)</a></li>
                     <li class="current"><a href="tables.html"><i class="glyphicon glyphicon-list"></i> Tables</a></li>

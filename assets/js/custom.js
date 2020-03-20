@@ -1,4 +1,6 @@
 $(document).ready(function(){
+
+
   $(".submenu > a").click(function(e) {
     e.preventDefault();
     var $li = $(this).parent("li");
@@ -13,13 +15,6 @@ $(document).ready(function(){
       $ul.slideDown(350);
       $li.addClass("open");
     }
-
-  });
-  $('#table_inv-rec').css({
-    display: 'none'
-  });
-  $('#table_cn').css({
-    display: 'none'
   });
   
 });
