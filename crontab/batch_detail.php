@@ -6,4 +6,4 @@ echo 'batch_detail';
 
 //--------- crate json batch_detail_20200320.json
 
-//--------- 
+//--------- send email
