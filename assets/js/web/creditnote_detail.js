@@ -1,0 +1,57 @@
+$('#sale_report').DataTable({
+    "ajax": {
+        "url": "web/data/sale_mock.php",
+        "dataSrc": ""
+    },
+    "ordering": false,
+    order: [],
+    "language": {
+        "lengthMenu": "แสดง _MENU_ รายการ",
+        "info": "หน้าที่ _PAGE_ จาก _PAGES_ หน้า",
+    },
+    columnDefs: [{
+        "targets": 'no-sort',
+        'orderable': false,
+    }],
+    deferRender: true,
+    columns: [
+
+        {title: "so_code", mData: "barcode"},
+        {title: "cus_id", mData: "Productname"},
+        {title: "firstname", mData: "ProductBrandName"},
+        {title: "lastname", mData: "PE"},
+        {title: "gender", mData: "PM"},
+        {title: "po_date", mData: "QTY"},
+        {title: "inv_code", mData: "Amount"},
+        {title: "inv_date", mData: "Amount GP"},
+        {title: "pay_by", mData: "Inv_Date"},
+        {title: "is_pay", mData: "barcode"},
+        {title: "pay_date", mData: "barcode"},
+        {title: "ship_by", mData: "Productname"},
+        {title: "ship_date", mData: "ProductBrandName"},
+        {title: "ship_code", mData: "PE"},
+        {title: "ship_amount", mData: "PM"},
+        {title: "sel_by", mData: "GP%"},
+        {title: "province", mData: "PricePerUnit"},
+        {title: "GEO", mData: "QTY"},
+        {title: "po_status", mData: "Amount GP"},
+        {title: "cha_name", mData: "Inv_Date"},
+        {title: "cn_note", mData: "Inv_Date"},
+        {title: "cn_type", mData: "Inv_Date"},
+        {title: "cn_status", mData: "Inv_Date"},
+        {title: "cn_remark", mData: "Inv_Date"},
+        {title: "cn_total", mData: "Inv_Date"},
+        {title: "barcode", mData: "barcode"},
+        {title: "pro_name", mData: "Productname"},
+        {title: "pro_type", mData: "ProductBrandName"},
+        {title: "pro_brand", mData: "PE"},
+        {title: "pro_group", mData: "PM"},
+        {title: "sup_name", mData: "GP%"},
+        {title: "QTY", mData: "PricePerUnit"},
+        {title: "price_unit", mData: "QTY"},
+        {title: "Amount", mData: "Amount"},
+        {title: "Discount", mData: "Amount GP"},
+        {title: "Dis_detail", mData: "Inv_Date"},
+    ]
+});
+

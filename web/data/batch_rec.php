@@ -1,6 +1,6 @@
 <?php
-include '../lib/dbconfig.php';
-include '../lib/Common.php';
+require_once '../../lib/dbconfig.php';
+require_once '../../lib/Common.php';
 
 $Common = new Common();
 

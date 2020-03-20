@@ -1,0 +1,6 @@
+.row-span {
+    rowspan : '2';
+}
+.con-span{
+    colspan : '2';
+}

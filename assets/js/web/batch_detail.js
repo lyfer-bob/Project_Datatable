@@ -186,9 +186,7 @@ function getBatch(type,date) {
                     $("#batch_search").append('<option value="'+ data[i] +'">'+ data[i] +'</option>');
                     i++; //use i++ only here!
                 })
-
             }
-
         },
     };
     //send get bat to batch_number
