@@ -21,6 +21,21 @@
 
                         </table>
                     </div>
+                    <br>
+                    <br>
+                    <div class=" form-inline">
+                        <div class="form-group pr-2 pb-1">
+                            <br>
+                            <label class="label-search">Date &nbsp;:&nbsp;</label>
+                            <input type="text" class="form-control custom-date" id="date_search" >
+                        </div>
+                    </div>
+                    <br>
+                    <div class="table-responsive">
+                        <table id="sale_report1"  class="display" style="width:100%">
+
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>

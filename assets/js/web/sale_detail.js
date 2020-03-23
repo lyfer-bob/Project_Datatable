@@ -5,10 +5,10 @@ $('#sale_report').DataTable({
         "dataSrc": ""
     },
     order: [],
-    "language": {
-        "lengthMenu": "แสดง _MENU_ รายการ",
-        "info": "หน้าที่ _PAGE_ จาก _PAGES_ หน้า",
-    },
+    // "language": {
+    //     "lengthMenu": "แสดง _MENU_ รายการ",
+    //     "info": "หน้าที่ _PAGE_ จาก _PAGES_ หน้า",
+    // },
     columnDefs: [{
         "targets": 'no-sort',
         'orderable': false,

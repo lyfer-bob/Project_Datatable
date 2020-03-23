@@ -15,6 +15,17 @@
                 <div class="content-box-large">
                     <div class="panel-title">Invoice Report</div>
                     <br>
+                    <div class=" form-inline">
+                        <div class="form-group pr-2 pb-1">
+                            <br>
+                            <label class="label-search">Report &nbsp;:&nbsp;</label>
+                            <select class="form-control custom-select" id="type_search">
+                                <option value="Invoice">SO</option>
+                                <option value="Receive">INV</option>
+                            </select>
+                            <input type="text" class="form-control custom-date" id="date_search" >
+                        </div>
+                    </div>
                     <br>
                     <div class="table-responsive">
                         <table id="sale_report"  class="display" style="width:100%">

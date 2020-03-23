@@ -16,11 +16,24 @@ $('#sale_report').DataTable({
     deferRender: true,
     columns: [
 
-        {title: "So_code", mData: "barcode"},
-        {title: "Inv_code", mData: "Productname"},
-        {title: "Ship_by", mData: "ProductBrandName"},
+        {title: "Waybill", mData: "barcode"},
+        {title: "Pack_num", mData: "Productname"},
+        {title: "Rec_name", mData: "ProductBrandName"},
+        {title: "Rec_phone", mData: "PE"},
+        {title: "Rec_code", mData: "PM"},
+        {title: "Rec_add", mData: "barcode"},
+        {title: "Rec_mail", mData: "Productname"},
+        {title: "COD_amount", mData: "ProductBrandName"},
         {title: "Pro_name", mData: "PE"},
-        {title: "*QTY", mData: "PM"},
+        {title: "Ins_amount", mData: "PM"},
+        {title: "Weight", mData: "barcode"},
+        {title: "Length", mData: "Productname"},
+        {title: "Width", mData: "ProductBrandName"},
+        {title: "Height", mData: "PE"},
+        {title: "Cartoon_pri", mData: "PM"},
+        {title: "Cartoon_num", mData: "barcode"},
+        {title: "Packcarge", mData: "Productname"},
+        {title: "Remark", mData: "ProductBrandName"},
     ]
 });
 

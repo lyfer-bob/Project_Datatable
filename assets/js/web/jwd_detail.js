@@ -20,6 +20,6 @@ $('#sale_report').DataTable({
         {title: "Inv_code", mData: "Productname"},
         {title: "Ship_by", mData: "ProductBrandName"},
         {title: "Pro_name", mData: "PE"},
-        {title: "*QTY", mData: "PM"},
+        {title: "QTY", mData: "PM"},
     ]
 });
