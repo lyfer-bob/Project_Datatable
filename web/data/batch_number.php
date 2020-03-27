@@ -7,21 +7,17 @@ $Common = new Common();
 $table = $_GET['type'];
 //check tablename
 if ( isset($table)) {
-    if ( $table  == 'inv'){
-        $tabledraw = 'TaxInvoice_detail';
+    if ( $table  == 'test'){
+        $tabledraw = 'test';
     }
-    else if ( $table == 'rec') {
-        $tabledraw = 'Receive_detail';
+    else if ( $table == 'test') {
+        $tabledraw = 'test';
     }
-    else if(  $table == 'cre') {
-        $tabledraw = 'CrediteNote_detail';
+    else if(  $table == 'test') {
+        $tabledraw = 'test';
     }
 }
-$sql = "SELECT DISTINCT BatchNumber
-FROM $tabledraw
-WHERE DataOf = '" . $_GET['date'] ."'" ;
-$result = $conn->query($sql);
-
+$sql = "";
 $data = [];
 
 while ($row = $result->fetch_array(MYSQLI_ASSOC)) {
@@ -30,7 +26,7 @@ while ($row = $result->fetch_array(MYSQLI_ASSOC)) {
 //    print_r($row);
 //    echo '</pre>';
 //    exit;
-    $data[] = $row["BatchNumber"];
+    $data[] = $row["test"];
 }
 
 

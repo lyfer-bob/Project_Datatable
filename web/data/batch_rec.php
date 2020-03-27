@@ -4,20 +4,7 @@ require_once '../../lib/Common.php';
 
 $Common = new Common();
 
-$sql = "SELECT BatchNumber, 
-invoice_number AS invoiceNumber,
-po_date AS poDate,
-pay_amount AS payAmount,
-shipping_by AS shippingBy,
-shipping_package AS shippingPackage,
-tax_name AS taxName,
-items->>'$.*.item_code' AS itemCode,
-items->>'$.*.ProductName' AS productName,
-items->>'$.*.PricePerUnit' AS unitPrice,
-items->>'$.*.QTY' AS qty,
-items->>'$.*.ProductGroupID' AS productGroupID 
-FROM Receive_detail
-WHERE DataOf = "."'".$_GET['date']."'";
+$sql = "";
 
 $result = $conn->query( $sql );
 

@@ -1,6 +1,6 @@
 $('#sale_report').DataTable({
     "ajax": {
-        "url": "web/data/sale_mock.php",
+        "url": 'link',
         "dataSrc": ""
     },
     "ordering": false,

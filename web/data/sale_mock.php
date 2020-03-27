@@ -1,11 +1,9 @@
 <?php
 
 $data[0] = [
-    'barcode' => '100310008',
-    'Productname' => 'ชุดที่นอนเป่าลม Master',
+    'barcode' => '1111111',
+    'Productname' => 'test',
     'ProductBrandName' => 'Master',
-    'PE' => 'นางสาวฆีรตรา ทองสุขใส',
-    'PM' => 'นางสาวอุบลรัตน์ ไกรสัย',
     'PricePerUnit' => '1590',
     'GP%' => '50%',
     'QTY' => '180',
@@ -15,11 +13,9 @@ $data[0] = [
 ];
 
 $data[1] = [
-    'barcode' => '100410002',
+    'barcode' => '2124242',
     'Productname' => 'ชเครื่องผลิตโอโซน รุ่น MAHASAMUT แถมฟรี รถเข็นช้อปปิ้ง',
     'ProductBrandName' => 'sabaideecare',
-    'PE' => 'นางสาวฆีรตรา ทองสุขใส',
-    'PM' => 'นางสาวอุบลรัตน์ ไกรสัย',
     'PricePerUnit' => '1590',
     'GP%' => '50%',
     'QTY' => '180',
@@ -29,11 +25,9 @@ $data[1] = [
 ];
 
 $data[2] = [
-    'barcode' => '100420007',
+    'barcode' => '3453543345',
     'Productname' => 'ชุดหม้อ Detachable Denpa',
     'ProductBrandName' => 'DENPA',
-    'PE' => 'นางสาวฆีรตรา ทองสุขใส',
-    'PM' => 'นางสาวอุบลรัตน์ ไกรสัย',
     'PricePerUnit' => '1590',
     'GP%' => '50%',
     'QTY' => '180',
@@ -43,11 +37,9 @@ $data[2] = [
 ];
 
 $data[3] = [
-    'barcode' => '100430001',
+    'barcode' => '456786786378',
     'Productname' => 'ชุดจานชามหรู Princess Ware 65 ชิ้น',
     'ProductBrandName' => 'Princess Ware',
-    'PE' => 'นางสาวฆีรตรา ทองสุขใส',
-    'PM' => 'นางสาวอุบลรัตน์ ไกรสัย',
     'PricePerUnit' => '1590',
     'GP%' => '50%',
     'QTY' => '180',
@@ -57,11 +49,9 @@ $data[3] = [
 ];
 
 $data[4] = [
-    'barcode' => '100520007',
+    'barcode' => '456453423',
     'Productname' => 'กางเกงพลีท Classy Pants 7 Colors',
     'ProductBrandName' => 'Classy',
-    'PE' => 'นางสาวฆีรตรา ทองสุขใส',
-    'PM' => 'นางสาวอุบลรัตน์ ไกรสัย',
     'PricePerUnit' => '1590',
     'GP%' => '50%',
     'QTY' => '180',
@@ -71,11 +61,9 @@ $data[4] = [
 ];
 
 $data[5] = [
-    'barcode' => '100530001',
+    'barcode' => '3438763786',
     'Productname' => 'Miss Susie classic bags set สีน้ำเงิน Envy',
     'ProductBrandName' => 'Miss Susie',
-    'PE' => 'นางสาวฆีรตรา ทองสุขใส',
-    'PM' => 'นางสาวอุบลรัตน์ ไกรสัย',
     'PricePerUnit' => '1590',
     'GP%' => '50%',
     'QTY' => '180',

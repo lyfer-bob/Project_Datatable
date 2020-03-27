@@ -1,7 +1,7 @@
 
 $('#sale_report').DataTable({
     "ajax": {
-        "url": "web/data/sale_mock.php",
+        "url": 'link',
         "dataSrc": ""
     },
     order: [],
@@ -25,7 +25,7 @@ $('#sale_report').DataTable({
 
 $('#sale_report1').DataTable({
     "ajax": {
-        "url": "web/data/sale_mock.php",
+        "url": 'link',
         "dataSrc": ""
     },
     order: [],

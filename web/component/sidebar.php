@@ -6,14 +6,14 @@
 <!--            <i class="glyphicon glyphicon-home"</i>->homeicon-->
 <!--            <i class="glyphicon glyphicon-list"></i> ->list icon-->
 
-            <li class="current"><a href="/happy2jde/index.php?batch_detail.php">Batch Detail</a></li>
-            <li class="current"><a href="/happy2jde/index.php?page=sale_detail">Sale Report</a></li>
-            <li class="current"><a href="/happy2jde/index.php?page=invoice_detail">Invoice Report</a></li>
-            <li class="current"><a href="/happy2jde/index.php?page=creditnote_detail">Credite Note Report</a></li>
-            <li class="current"><a href="/happy2jde/index.php?page=performance_detail">Performance Report</a></li>
-            <li class="current"><a href="/happy2jde/index.php?page=board_detail">Board Report</a></li>
-            <li class="current"><a href="/happy2jde/index.php?page=express_detail">Best Express Report </a></li>
-            <li class="current"><a href="/happy2jde/index.php?page=jwd_detail">JWD Report</a></li>
+            <li class="current"><a href="/link">Batch Detail</a></li>
+            <li class="current"><a href="/link">Sale Report</a></li>
+            <li class="current"><a href="/link">Invoice Report</a></li>
+            <li class="current"><a href="/link">Credite Note Report</a></li>
+            <li class="current"><a href="/llink">Performance Report</a></li>
+            <li class="current"><a href="/link">Board Report</a></li>
+            <li class="current"><a href="/link">Best Express Report </a></li>
+            <li class="current"><a href="/link">JWD Report</a></li>
 <!--            <li class="submenu">-->
 <!--                <a href="#">-->
 <!--                    <i class="glyphicon glyphicon-list"></i> Pages-->

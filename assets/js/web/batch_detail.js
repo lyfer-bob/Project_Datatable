@@ -16,7 +16,7 @@ function tableInit() {
         "retrieve": true,
         "ordering": false,
         "ajax": {
-            "url": "data/batch_inv.php?&date=" + date,
+            "url": 'link',
             "dataSrc": ""
         },
         columns: [
@@ -54,17 +54,17 @@ function tableInit() {
 
 
 function tableEdit() {
-    let typeSearch = $('#type_search').val();
-    let dateSearch = $('#date_search').val();
+    let typeSearch;
+    let dateSearch ;
     if (typeSearch !== 'null') { //check type not null
         getDatatable(typeSearch, dateSearch); //send para to getDatatable for DrawDatable onChange
         getBatch(typeSearch, dateSearch);   //send para to getBatch for get batch On SelectOption
     }
 }
 function tableBatchEdit() {
-    let typeSearch = $('#type_search').val();
-    let dateSearch = $('#date_search').val();
-    let batchSearch = $('#batch_search').val();
+    let typeSearch;
+    let dateSearch ;
+    let batchSearch;
     batchChange(typeSearch, dateSearch, batchSearch); //send all para for get  DrawDatable
 }
 
@@ -80,12 +80,12 @@ function getDatatable(type, date ) {
         },
     };
     //check url and sent Get date to
-    if (type === 'Creditnote') {
-        params.url = 'data/batch_cre.php?date=' + date;
-    } else if (type === 'Receive') {
-        params.url = 'data/batch_rec.php?date=' + date
-    } else if (type === 'Invoice') {
-        params.url = 'data/batch_inv.php?date=' + date;
+    if (type === 'test') {
+        params.url = 'link';
+    } else if (type === 'test') {
+        params.url = 'link'
+    } else if (type === 'test') {
+        params.url = 'link';
     }
     $.ajax(params);
 }
@@ -93,20 +93,20 @@ function getDatatable(type, date ) {
 function batchChange(type, date, batch) {
     let types;
     //check type
-    if(type === 'Invoice') {
+    if(type === 'test') {
         types = 'inv';
-    } else  if (type === 'Receive') {
-        types = 'rec';
+    } else  if (type === 'test') {
+        types = 'test';
     } else {
-        types = 'cre';
+        types = 'test';
     }
     $.ajax({
         type: 'GET',
         contentType: "application/json; charset=utf-8",
         dataType: 'json',
-        url: 'data/query_all.php?date=' + date + '&batch=' +  batch + '&type=' +  types, //send Get[date,batch,types] to php ,query on MySQL
+        url: 'link',
         success: function (response) {
-            SetDataTable(response, type) //send response and type to SetDataTable (DrawTable date +  type + batch)
+            SetDataTable(response, type) ////send response and type to SetDataTable (DrawTable date +  type )
         },
     });
 }
@@ -114,7 +114,7 @@ function batchChange(type, date, batch) {
 function SetDataTable(data, type) {
     let columns;
     //check column draw data
-    if (type === 'Creditnote') {
+    if (type === 'test') {
         columns = [
             {title: "BatchNumber", mData: "BatchNumber", "className": "v-align-top"}, // title -> ColumnTable1 , mData -> JSONdata1
             {title: "Invoice No.", mData: "invoiceNumber"},
@@ -151,7 +151,7 @@ function SetDataTable(data, type) {
     }
     //clear data in table
     if ($.fn.DataTable.isDataTable('#tbBat',data)) {
-        var tableDraw = $('#tbBat');
+        var tableDraw;
         tableDraw.DataTable().clear().destroy();
         tableDraw.empty();
     }
@@ -180,7 +180,9 @@ function getBatch(type,date) {
         //url : 'link',;
         success: function (r) {
             let data = r;
-            $("#batch_search").html('');    //clear data on SelectOption
+            let seart;
+            seart.html('');    //clear data on SelectOption
+            seart.append('<option value="'+ 'null' + '">' + '--batch detail--' +'</option>'); //add default value
             for(let i=0; i<data.length;) { // fetch data on SelectOption
                 $.each(data, function(){
                     $("#batch_search").append('<option value="'+ data[i] +'">'+ data[i] +'</option>');
@@ -191,11 +193,11 @@ function getBatch(type,date) {
     };
     //send get bat to batch_number
     if (type === 'Creditnote') {
-        params.url = 'data/batch_number.php?type=cre&date=' + date;
+        params.url = 'link';
     } else if (type === 'Receive') {
-        params.url = 'data/batch_number.php?type=rec&date=' + date;
+        params.url = 'link';
     } else if (type === 'Invoice') {
-        params.url = 'data/batch_number.php?type=inv&date=' + date;
+        params.url = 'link';
     }
     $.ajax(params);
 }
